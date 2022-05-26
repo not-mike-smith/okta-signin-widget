@@ -220,6 +220,7 @@ const consent = {
   '/idp/idx/introspect': [
     // 'consent-admin',
     'consent-enduser',
+    'consent-granular',
   ],
   '/idp/idx/consent': [
     // note that the success 'href' is in reality a redirect (i.e. /login/token/redirect?stateToken={{stateToken}})
