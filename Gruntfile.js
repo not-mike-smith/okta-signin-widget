@@ -88,26 +88,28 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            // dest: 'dist',
+            dest: 'dist',
             src: [
               'package.json',
               'LICENSE',
               'THIRD-PARTY-NOTICES',
               '*.md',
               'types/**',
-              // 'src/**',
+              'src/**',
               '!src/v3/**',
             ],
           },
           {
             expand: true,
-            dest: 'dist/src',
-            rename(dest, filename, options) {
-              console.log({dest, filename, options});
-              return filename;
-            },
+            dest: 'dist/src/v3',
+            cwd: 'src/v3/src',
             src: [
-              'src/v3/src/**'
+              '**',
+              '!bin/**',
+              '!mocks/**',
+              '!**/__snapshots__/**',
+              '!**/*.svg',
+              '!**/*.test.{js,jsx,ts,tsx}',
             ],
           }
         ]
