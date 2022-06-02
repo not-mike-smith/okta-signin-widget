@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 
   var Handlebars  = require('handlebars'),
       postcssAutoprefixer = require('autoprefixer')({remove: false}),
-      cssnano     = require('cssnano')({safe: true}),      
+      cssnano     = require('cssnano')({safe: true}),
       sass        = require('sass'),
       Fiber       = require('fibers'),
       path        = require('path');
@@ -81,6 +81,24 @@ module.exports = function(grunt) {
             }
           }
         ]
+      },
+
+      'src-to-dist': {
+        files: [
+          {
+            expand: true,
+            src: [
+              'package.json',
+              'LICENSE',
+              'THIRD-PARTY-NOTICES',
+              '*.md',
+              'types',
+              'src',
+              '!src/v3/node_modules',
+            ],
+            dest: 'dist',
+          },
+        ],
       },
 
       'generate-in-translation': {
@@ -234,7 +252,7 @@ module.exports = function(grunt) {
             dest: 'target/js'
           }
         ]
-      }
+      },
     },
 
     exec: {
@@ -248,7 +266,6 @@ module.exports = function(grunt) {
       'generate-config': 'yarn generate-config',
       'run-protractor': 'yarn protractor',
       'pseudo-loc': 'node scripts/buildtools pseudo-loc',
-      'prepack': 'node scripts/buildtools build:prepack',
       'build-types': 'yarn build:types'
     },
 
@@ -298,7 +315,7 @@ module.exports = function(grunt) {
             extensions: ['html'],
             setHeaders: res => {
               res.setHeader(
-                'Content-Security-Policy', 
+                'Content-Security-Policy',
                 `script-src 'unsafe-inline' http://localhost:${DEFAULT_SERVER_PORT}`
               );
             }
@@ -333,8 +350,17 @@ module.exports = function(grunt) {
         ]
       }
     },
-
   });
+
+  grunt.task.registerTask(
+    'prepack',
+    'Prepares the dist directory for publishing on npm',
+    function() {
+      grunt.task.run([
+        'copy:src-to-dist'
+      ]);
+    }
+  );
 
   grunt.task.registerTask(
     'build-e2e-app',
@@ -424,7 +450,7 @@ module.exports = function(grunt) {
     if (prodBuild) {
       buildTasks.push('exec:build-release');
       postBuildTasks.push('copy:target-to-dist');
-      postBuildTasks.push('exec:prepack');
+      postBuildTasks.push('prepack');
     } else {
       const devTask = mode === 'watch' ? 'exec:build-dev-watch' : 'exec:build-dev';
       buildTasks.push(devTask);

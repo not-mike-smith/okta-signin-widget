@@ -119,10 +119,10 @@ export default {
       'src',
       'index',
     );
-    config.resolve.alias['@okta/okta-auth-js'] = resolve(
-      process.cwd(),
-      'node_modules/@okta/okta-auth-js/dist/okta-auth-js.umd.js',
-    );
+    // config.resolve.alias['@okta/okta-auth-js'] = resolve(
+    //   process.cwd(),
+    //   'node_modules/@okta/okta-auth-js/dist/okta-auth-js.umd.js',
+    // );
 
     if (env.production) {
       config.output.libraryTarget = 'umd';
