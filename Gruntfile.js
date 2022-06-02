@@ -8,20 +8,21 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
 
-  var Handlebars  = require('handlebars'),
-      postcssAutoprefixer = require('autoprefixer')({remove: false}),
-      cssnano     = require('cssnano')({safe: true}),
-      sass        = require('sass'),
-      Fiber       = require('fibers'),
-      path        = require('path');
+  let Handlebars  = require('handlebars');
+  let postcssAutoprefixer = require('autoprefixer')({remove: false});
+  let cssnano     = require('cssnano')({safe: true});
+  let sass        = require('sass');
+  let Fiber       = require('fibers');
+  let path        = require('path');
 
-  var JS                    = 'target/js',
-      DIST                  = 'dist/dist',
-      SASS                  = 'target/sass',
-      I18N_SRC              = 'packages/@okta/i18n/src',
-      COURAGE_TYPES         = 'packages/@okta/courage-dist/types',
-      // Note: 3000 is necessary to test against certain browsers in SauceLabs
-      DEFAULT_SERVER_PORT   = 3000;
+  let JS                    = 'target/js';
+  let DIST                  = 'dist/dist';
+  let SASS                  = 'target/sass';
+  let I18N_SRC              = 'packages/@okta/i18n/src';
+  let COURAGE_TYPES         = 'packages/@okta/courage-dist/types';
+
+  // NOTE: 3000 is necessary to test against certain browsers in SauceLabs
+  let DEFAULT_SERVER_PORT   = 3000;
 
   var mockDuo = grunt.option('env.mockDuo');
 
@@ -87,18 +88,29 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
+            // dest: 'dist',
             src: [
               'package.json',
               'LICENSE',
               'THIRD-PARTY-NOTICES',
               '*.md',
-              'types',
-              'src',
-              '!src/v3/node_modules',
+              'types/**',
+              // 'src/**',
+              '!src/v3/**',
             ],
-            dest: 'dist',
           },
-        ],
+          {
+            expand: true,
+            dest: 'dist/src',
+            rename(dest, filename, options) {
+              console.log({dest, filename, options});
+              return filename;
+            },
+            src: [
+              'src/v3/src/**'
+            ],
+          }
+        ]
       },
 
       'generate-in-translation': {
