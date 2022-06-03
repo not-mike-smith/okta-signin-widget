@@ -1,16 +1,16 @@
 const path = require('path');
 const { readFileSync } = require('fs');
 
-const ONE_MB = 1000000;
-const EXPECTED_PACKAGE_SIZE = 12 * ONE_MB;
+const MB = 	1024 * 1024;
+const EXPECTED_PACKAGE_SIZE = 16.5 * MB;
 const EXPECTED_PACKAGE_FILES = 2200;
 
 const EXPECTED_BUNDLE_SIZES = {
-  'okta-sign-in-no-jquery.js': 1.5 * ONE_MB,
-  'okta-sign-in.entry.js': 1.5 * ONE_MB,
-  'okta-sign-in.js': 4.2 * ONE_MB,
-  'okta-sign-in.min.js': 1.7 * ONE_MB,
-  'okta-sign-in.no-polyfill.min.js': 1.5 * ONE_MB
+  'okta-sign-in-no-jquery.js': 1.5 * MB,
+  'okta-sign-in.entry.js': 1.5 * MB,
+  'okta-sign-in.js': 4.2 * MB,
+  'okta-sign-in.min.js': 1.7 * MB,
+  'okta-sign-in.no-polyfill.min.js': 1.5 * MB
 };
 
 exports.command = 'verify-package';
@@ -73,7 +73,7 @@ function verifyPackageContents() {
       throw new Error(`Expected file ${filename} was not found in the package`);
     }
   });
-  console.log(`Package size is within expected range: ${manifest.size / ONE_MB} MB, ${manifest.entryCount} files`);
+  console.log(`Package size is within expected range: ${manifest.size / MB} MB, ${manifest.entryCount} files`);
 
   Object.keys(EXPECTED_BUNDLE_SIZES).forEach(bundleName => {
     if (!manifest.files.some(entry => entry.path === `dist/js/${bundleName}`)) {
