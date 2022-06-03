@@ -42,8 +42,7 @@
     "./src/types/*"
   ],
   "exclude": [
-    "./types/generated/*",
-    "./src/v3/**"
+    "./types/generated/*"
   ],
   "files": [
     "src/index.ts"

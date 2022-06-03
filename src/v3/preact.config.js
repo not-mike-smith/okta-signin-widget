@@ -113,8 +113,6 @@ export default {
       ],
     });
 
-    console.log(process.cwd());
-
     // Use any `index` file, not just index.js
     config.resolve.alias['preact-cli-entrypoint'] = join(
       __dirname,
