@@ -275,7 +275,7 @@ module.exports = function(grunt) {
       'build-dev': 'yarn build:webpack-dev' + (mockDuo ? ' --env mockDuo=true' : ''),
       'build-dev-watch':
         'yarn build:webpack-dev --watch --env skipAnalyzer=true' + (mockDuo ? ' --env mockDuo=true' : ''),
-      'build-release': 'yarn build:webpack-release && yarn build:esm',
+      'build-release': 'yarn build:webpack-release && yarn build:esm && yarn workspace v3 build',
       'build-e2e-app': 'yarn build:webpack-e2e-app',
       'generate-config': 'yarn generate-config',
       'run-protractor': 'yarn protractor',

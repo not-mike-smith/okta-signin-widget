@@ -12,7 +12,7 @@
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
     "checkJs": false,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "plugins": [
       {
         "transform": "@zerollup/ts-transform-paths"
@@ -33,17 +33,17 @@
       "util/*": ["./src/util/*"],
       "v1/*": ["./src/v1/*"],
       "v2/*": ["./src/v2/*"],
-      "v3/*": ["./src/v3/src/*"],
       "views/*": ["./src/views/*"],
       "widget/*": ["./src/widget/*"],
+      "src/*": ["./src/v3/src/*"]
     }
   },
   "include": [
-    "src/types/*"
+    "./src/types/*"
   ],
   "exclude": [
-    "types/generated/*",
-    "src/v3/*"
+    "./types/generated/*",
+    "./src/v3/**"
   ],
   "files": [
     "src/index.ts"

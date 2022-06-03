@@ -7,14 +7,10 @@
     "jsxFactory": "h",
     "strict": true,
     "skipLibCheck": true,
-    "src/*": [
-      "./src/*"
-    ],
-    "react": [
-      "node_modules/preact/compat"
-    ],
-    "react-dom": [
-      "node_modules/preact/compat"
-    ]
+    "paths": {
+      "src/*": [ "./src/*" ],
+      "react": [ "node_modules/preact/compat" ],
+      "react-dom": [ "node_modules/preact/compat" ]
+    }
   }
 }
