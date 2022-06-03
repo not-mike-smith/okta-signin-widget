@@ -62,6 +62,7 @@ function verifyPackageContents() {
     'dist/js/okta-sign-in.entry.js',
     'dist/js/okta-sign-in.entry.js.map',
     'dist/js/okta-sign-in.min.js',
+    'dist/js/okta-sign-in.next.js',
     'dist/esm/src/index.js',
     'dist/labels/json/country_de.json',
     'dist/labels/json/login_ru.json',
@@ -69,7 +70,7 @@ function verifyPackageContents() {
     'dist/font/okticon.ttf',
     'dist/font/okticon.woff',
     'types/src/index.d.ts',
-    'types/packages/@okta/courage-dist/types/courage/framework/Model.d.ts'
+    'types/packages/@okta/courage-dist/types/courage/framework/Model.d.ts',
   ];
 
   expectedFiles.forEach((filename) => {
